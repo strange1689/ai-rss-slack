@@ -1,0 +1,31 @@
+name: AI RSS → Slack
+
+on:
+  schedule:
+    # JST 朝9時 = UTC 0時
+    - cron: "0 0 * * *"
+    # JST 夕18時 = UTC 9時
+    - cron: "0 9 * * *"
+  # 手動実行も可能にする（テスト用）
+  workflow_dispatch:
+
+jobs:
+  rss-to-slack:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 をセットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 依存ライブラリをインストール
+        run: pip install -r requirements.txt
+
+      - name: RSS取得 → Slack投稿
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python rss_to_slack.py
