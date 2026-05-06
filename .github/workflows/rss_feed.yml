@@ -2,10 +2,8 @@ name: AI RSS → Slack
 
 on:
   schedule:
-    # JST 朝9時 = UTC 0時
-    - cron: "0 0 * * *"
-    # JST 夕18時 = UTC 9時
-    - cron: "0 9 * * *"
+    - cron: "0 21 * * *"   # JST 朝6:00（UTC 21:00）
+    - cron: "15 9 * * *"   # JST 夕18:15（UTC 9:15）
   # 手動実行も可能にする（テスト用）
   workflow_dispatch:
 
