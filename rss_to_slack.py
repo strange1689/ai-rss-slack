@@ -159,8 +159,7 @@ def post_to_slack(payload: dict):
 # ============================================================
 
 def main():
-    hour = datetime.now(JST).hour
-    period = "朝" if hour < 13 else "夕"
+    period = "朝"
 
     print(f"=== AI RSSフィード → Slack ({period}) ===")
     articles = fetch_articles()
